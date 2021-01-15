@@ -1,0 +1,7 @@
+## Interface: 90002
+## Title: VeryImportantAddon
+## Author: erytheis
+## Version: 9.0.2-06
+
+VeryImportantAddon.xml
+VeryImportantAddon.lua
