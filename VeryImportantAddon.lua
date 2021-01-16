@@ -94,7 +94,6 @@ local function playTrack(track)
     elseif (track.type == soundType.SOUND) then
         PlaySound(track.sound)
     elseif (track.type == soundType.CUSTOM) then
-        stopSoundHandler()
         customSoundId = select(2, PlaySoundFile(track.sound, "Master"))
     end
 end
@@ -135,9 +134,7 @@ ConvokeEventFrame:SetScript("OnEvent",
     function(self, event, ...)
         local sounds = { 'comet', 'what_is_he_doing' }
         local arg1, arg2, arg3, arg4, arg5 = ...
-
         if (arg3 == 323764) then
-            --        if (arg3==194153) then
             sound = sounds[math.random(#sounds)]
             playSoundHandler(sound)
         end
@@ -155,14 +152,16 @@ function LowHPAlert_OnUpdate_default()
     local time_diff = cur_ts - last_triggered_ts
     local is_same_loc = isSameLocation(dimon_name)
 
+
     if (hpPct < 0.25) then
-        hp_above_threshold = false
+
         if (time_diff > 30)
                 and (hp_above_threshold)
                 and (is_same_loc) then
             last_triggered_ts = GetTime();
             if (enable_sounds) then playSoundHandler('dimon') end
         end
+        hp_above_threshold = false
     else
         hp_above_threshold = true
     end
